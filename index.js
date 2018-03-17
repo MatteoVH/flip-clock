@@ -15,7 +15,7 @@ function updateTime() {
   }
 
   const minutes = time.getMinutes();
-  const minutesString = minutes.toString();
+  let minutesString = minutes.toString();
   if (minutesString.length === 1) {
     minutesString = "0" + minutesString;
   }
