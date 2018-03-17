@@ -1,0 +1,75 @@
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+figure {
+  margin: 0;
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  background-color: beige;
+  height: 300px;
+  width: 500px;
+}
+
+.display {
+  background-color: #222;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 75%;
+  width: 100%;
+}
+
+.hours {
+  position: relative;
+  text-align: center;
+}
+
+.hours, .minutes {
+  position: relative;
+  color: white;
+  font-family: helvetica;
+  font-size: 140px;
+  margin: 0 20px;
+  background-color: black;
+  height: 85%;
+  width: 180px;
+}
+
+.hours .ampm {
+  position: absolute;
+  left: 10px;
+  bottom: 55px;
+  font-size: 18px;
+  color: white;
+}
+
+.fold {
+  width: 151px;
+  height: 2px;
+  background-color: black;
+  position: absolute;
+  top: 76px;
+}
+
+.branding {
+  color: white;
+  font-family: arial;
+  font-kerning: 1.1;
+  text-align: center;
+}
+
+.brand {
+  font-weight: bold;
+}
+
+.subtext {
+  font-size: 14px;
+}
