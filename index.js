@@ -63,19 +63,23 @@ function setInitialTime(time) {
   setDigit(".minutes .next.digit .back figure", time.minutesString);
 }
 
-function flipClock(time, containerDivClass, timeGetter) {
+function flipClock(
+  time,
+  containerDivClass = ".minutes",
+  timeGetter = "minutesString"
+) {
   //flip digit over
   const upperDigit = document.querySelector(
     `${containerDivClass} .current.digit .upper`
   );
   upperDigit.className += " flipped";
-  console.log(time.minutesString);
 
   //if we're at the hour mark we also have to flip the hour digit
   if (containerDivClass !== ".hours" && time.minutesString === "00") {
     flipClock(time.copy(), ".hours", "hoursString");
   }
 
+  // wait for 2 second animation to finish before updating dom
   setTimeout(() => {
     //delete unnecessary old card
     const oldDigit = document.querySelector(
@@ -87,16 +91,14 @@ function flipClock(time, containerDivClass, timeGetter) {
     const curDigit = document.querySelector(`${containerDivClass} .next.digit`);
     curDigit.className = "current digit";
 
-    // create next card
+    // create next card for next transition
     const nextDigit = document.createElement("figure");
     nextDigit.className = "next digit";
     curDigit.parentNode.insertBefore(nextDigit, curDigit);
 
-    // fill nextDigit HTML
-
+    // fill next card HTML
     const nextTime = time.copy().increment();
     const nextNextTime = nextTime.copy().increment();
-
     nextDigit.innerHTML = `
       <figure class="upper">
         <figure class="front">
@@ -126,17 +128,22 @@ function flipClock(time, containerDivClass, timeGetter) {
   }, 2000);
 }
 
-const time = new Time();
-setInitialTime(time.copy());
+document.addEventListener("DOMContentLoaded", () => {
+  const time = new Time();
+  setInitialTime(time.copy());
 
-const jsDate = new Date();
-const msToMinuteChange =
-  60000 - (jsDate.getSeconds() * 1000 + jsDate.getMilliseconds());
+  const jsDate = new Date();
+  // get the remaining milliseconds to the next minute change
+  const msToMinuteChange =
+    60000 - (jsDate.getSeconds() * 1000 + jsDate.getMilliseconds());
 
-function updateTimeEveryMinute() {
-  time.increment();
-  flipClock(time.copy(), ".minutes", "minutesString");
-  setTimeout(updateTimeEveryMinute, 60000);
-}
+  // increment our time and flip the clock every minute
+  function updateTimeEveryMinute() {
+    time.increment();
+    flipClock(time.copy());
+    setTimeout(updateTimeEveryMinute, 60000);
+  }
 
-setTimeout(updateTimeEveryMinute, msToMinuteChange);
+  // begin updating every minute on the next minute change
+  setTimeout(updateTimeEveryMinute, msToMinuteChange);
+});

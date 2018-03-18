@@ -14,7 +14,7 @@ figure {
   align-items: center;
   background-color: beige;
   height: 300px;
-  width: 500px;
+  width: 700px;
 }
 
 .display {
@@ -22,18 +22,24 @@ figure {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 80%;
-  width: 100%;
+  width: 95%;
+  margin-left: 10px;
 }
 
-.hours {
-  position: relative;
-  text-align: center;
+.time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 85%;
 }
 
 .hours,
 .minutes {
+  text-align: center;
   position: relative;
   color: white;
   font-family: helvetica;
@@ -41,7 +47,8 @@ figure {
   margin: 0 20px;
   background-color: black;
   height: 85%;
-  width: 180px;
+  width: 200px;
+  border-radius: 10px;
 }
 
 .digit {
@@ -52,14 +59,6 @@ figure {
   width: 100%;
   height: 100%;
   perspective: 800px;
-}
-
-.digit.next {
-  z-index: 1;
-}
-
-.digit.current {
-  z-index: 2;
 }
 
 .upper,
@@ -74,7 +73,7 @@ figure {
 .upper.flipped {
   transform: rotateX(180deg) translateY(-1px);
   transform-origin: bottom;
-  z-index: 5;
+  z-index: 1;
 }
 
 .lower {
@@ -86,10 +85,21 @@ figure {
   background-color: #111;
   position: absolute;
   overflow: hidden;
-  display: block;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+}
+
+.upper .front,
+.upper .back {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.lower .front,
+.lower .back {
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .upper .front figure {
@@ -110,67 +120,34 @@ figure {
   transform-origin: center;
 }
 
-.digit > .upper > span {
-  position: absolute;
-  top: 26px;
-  right: 38px;
-}
-
-.digit > .lower > span {
-  position: absolute;
-  top: -76px;
-  right: 38px;
-}
-
-.minutes > .digit span {
-  right: 0px;
-}
-
-.digit > .lower > span {
-  height: auto;
-}
-
-.hours .ampm {
-  position: absolute;
-  left: 10px;
-  bottom: 55px;
-  font-size: 18px;
-  color: white;
-}
-
-.fold {
-  width: 151px;
-  height: 2px;
-  background-color: black;
-  position: absolute;
-  top: 76px;
-}
-
 .branding {
+  margin-right: 40px;
+  margin-top: 60px;
   color: white;
   font-family: arial;
-  font-kerning: 1.1;
   text-align: center;
 }
 
 .brand {
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .subtext {
-  font-size: 14px;
+  font-size: 12px;
+  letter-spacing: 3px;
 }
 
 .stem {
   background-color: beige;
   margin: 0 auto;
-  width: 170px;
-  height: 50px;
+  width: 270px;
+  height: 25px;
 }
 
 .base {
   background-color: beige;
   margin: 0 auto;
-  width: 300px;
+  width: 310px;
   height: 20px;
 }
