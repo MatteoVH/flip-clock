@@ -63,18 +63,28 @@ function setInitialTime(time) {
   setDigit(".minutes .next.digit .back figure", time.minutesString);
 }
 
-function flipClock(time) {
+function flipClock(time, containerDivClass, timeGetter) {
   //flip digit over
-  const upperDigit = document.querySelector(".minutes .current.digit .upper");
+  const upperDigit = document.querySelector(
+    `${containerDivClass} .current.digit .upper`
+  );
   upperDigit.className += " flipped";
+  console.log(time.minutesString);
+
+  //if we're at the hour mark we also have to flip the hour digit
+  if (containerDivClass !== ".hours" && time.minutesString === "00") {
+    flipClock(time.copy(), ".hours", "hoursString");
+  }
 
   setTimeout(() => {
     //delete unnecessary old card
-    const oldDigit = document.querySelector(".minutes .current.digit");
+    const oldDigit = document.querySelector(
+      `${containerDivClass} .current.digit`
+    );
     oldDigit.parentNode.removeChild(oldDigit);
 
     // re-class existing card
-    const curDigit = document.querySelector(".minutes .next.digit");
+    const curDigit = document.querySelector(`${containerDivClass} .next.digit`);
     curDigit.className = "current digit";
 
     // create next card
@@ -91,24 +101,24 @@ function flipClock(time) {
       <figure class="upper">
         <figure class="front">
           <figure>
-            ${nextTime.minutesString}
+            ${nextTime[timeGetter]}
           </figure>
         </figure>
         <figure class="back">
           <figure>
-            ${nextNextTime.minutesString}
+            ${nextNextTime[timeGetter]}
           </figure>
         </figure>
         </figure>
         <figure class="lower">
           <figure class="front">
             <figure>
-              ${nextTime.minutesString}
+              ${nextTime[timeGetter]}
             </figure>
           </figure>
           <figure class="back">
             <figure>
-              ${nextNextTime.minutesString}
+              ${nextNextTime[timeGetter]}
             </figure>
           </figure>
         </figure>
@@ -125,7 +135,7 @@ const msToMinuteChange =
 
 function updateTimeEveryMinute() {
   time.increment();
-  flipClock(time.copy());
+  flipClock(time.copy(), ".minutes", "minutesString");
   setTimeout(updateTimeEveryMinute, 60000);
 }
 
