@@ -78,7 +78,6 @@ figure {
 }
 
 .lower {
-  z-index: -5;
   top: 102px;
 }
 
@@ -93,11 +92,11 @@ figure {
   backface-visibility: hidden;
 }
 
-.upper .front div {
+.upper .front figure {
   margin-top: 20px;
 }
 
-.lower .front div {
+.lower .front figure {
   margin-top: -82px;
 }
 
@@ -106,12 +105,9 @@ figure {
   transform-origin: center;
 }
 
-.back div {
+.back figure {
   transform: rotateZ(180deg) translateY(-22px);
   transform-origin: center;
-}
-
-.digit > .upper {
 }
 
 .digit > .upper > span {

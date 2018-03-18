@@ -40,27 +40,27 @@ class Time {
 
 function setInitialTime(time) {
   function setDigit(querySelector, val) {
-    const digitDivs = document.querySelectorAll(querySelector);
-    digitDivs.forEach(digitDiv => {
-      digitDiv.innerHTML = val;
+    const digitFigures = document.querySelectorAll(querySelector);
+    digitFigures.forEach(digitFigure => {
+      digitFigure.innerHTML = val;
     });
   }
 
-  // set current time on appropriate divs
-  setDigit(".hours .current.digit .front div", time.hoursString);
-  setDigit(".minutes .current.digit .front div", time.minutesString);
+  // set current time on appropriate figures
+  setDigit(".hours .current.digit .front figure", time.hoursString);
+  setDigit(".minutes .current.digit .front figure", time.minutesString);
 
-  // set next minute on appropriate divs
+  // set next minute on appropriate figures
   time.increment();
-  setDigit(".hours .current.digit .back div", time.hoursString);
-  setDigit(".minutes .current.digit .back div", time.minutesString);
-  setDigit(".hours .next.digit .front div", time.hoursString);
-  setDigit(".minutes .next.digit .front div", time.minutesString);
+  setDigit(".hours .current.digit .back figure", time.hoursString);
+  setDigit(".minutes .current.digit .back figure", time.minutesString);
+  setDigit(".hours .next.digit .front figure", time.hoursString);
+  setDigit(".minutes .next.digit .front figure", time.minutesString);
 
-  //set time in two minutes on appropriate divs
+  //set time in two minutes on appropriate figures
   time.increment();
-  setDigit(".hours .next.digit .back div", time.hoursString);
-  setDigit(".minutes .next.digit .back div", time.minutesString);
+  setDigit(".hours .next.digit .back figure", time.hoursString);
+  setDigit(".minutes .next.digit .back figure", time.minutesString);
 }
 
 function flipClock(time) {
@@ -90,26 +90,26 @@ function flipClock(time) {
     nextDigit.innerHTML = `
       <figure class="upper">
         <figure class="front">
-          <div>
+          <figure>
             ${nextTime.minutesString}
-          </div>
+          </figure>
         </figure>
         <figure class="back">
-          <div>
+          <figure>
             ${nextNextTime.minutesString}
-          </div>
+          </figure>
         </figure>
         </figure>
         <figure class="lower">
           <figure class="front">
-            <div>
+            <figure>
               ${nextTime.minutesString}
-            </div>
+            </figure>
           </figure>
           <figure class="back">
-            <div>
+            <figure>
               ${nextNextTime.minutesString}
-            </div>
+            </figure>
           </figure>
         </figure>
     `;
